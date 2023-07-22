@@ -1,0 +1,8 @@
+version: "3.8"
+
+services:
+  api.server:
+    build: .
+    restart: always
+    ports:
+      - 8080:8080

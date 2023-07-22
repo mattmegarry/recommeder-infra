@@ -5,4 +5,5 @@ __pycache__/
 
 # Data Directories #
 data_pg/
+data_admin/
 # -- End Data Directories -- #

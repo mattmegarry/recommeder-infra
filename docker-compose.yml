@@ -6,3 +6,16 @@ services:
     restart: always
     ports:
       - 8080:8080
+
+  postgres:
+    image: postgres:13.3
+    user: root
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./data_pg:/var/lib/postgresql/data

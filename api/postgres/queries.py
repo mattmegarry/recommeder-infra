@@ -1,7 +1,7 @@
 import psycopg2
 import random
 
-def getOneSemiRandomItemKey(app):
+def get_one_semi_random_item_key(app):
     select_query = "SELECT item_key FROM items LIMIT 1000;"
 
     item_key = None

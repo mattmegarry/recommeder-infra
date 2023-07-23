@@ -5,7 +5,7 @@ import json
 import confluent_kafka
 
 from .postgres.connection import get_postgres_connection
-from .postgres.queries import getOneSemiRandomItemKey, create_fct_metric
+from .postgres.queries import get_one_semi_random_item_key, create_fct_metric
 
 app = fastapi.FastAPI()
 
@@ -23,7 +23,7 @@ def read_root(request: fastapi.Request):
 
   print(f"User: {user_id} Session: {session}")
 
-  item_key = getOneSemiRandomItemKey(app)
+  item_key = get_one_semi_random_item_key(app)
 
   log_msg = json.dumps({"type": "reco", "user_id": user_id, "session": session, "item_id": item_key, "ts": ts})
   app.state.k.produce("logs", log_msg)

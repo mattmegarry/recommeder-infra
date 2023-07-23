@@ -26,3 +26,28 @@ def getOneSemiRandomItemKey(app):
 
     return item_key
 
+def create_fct_metric(app, date_stamp, time_stamp, evnt_stamp, user_id, session_id, item_id):
+    insert_query = """
+    INSERT INTO fct_hourly_metric (
+      date_stamp,
+      time_stamp,
+      evnt_stamp,
+      user_id,
+      session_id,
+      item_id
+    ) VALUES (%s, %s, %s, %s, %s, %s)
+    """
+    insert_data = [date_stamp, time_stamp, evnt_stamp, user_id, session_id, item_id]
+    
+    try:
+        cursor = app.state.connection.cursor()
+        cursor.execute(insert_query, insert_data)
+
+    except psycopg2.DatabaseError as e:
+        print(f"Error: {e}")
+
+    finally:
+        if cursor:
+            cursor.close()
+
+    return True

@@ -7,4 +7,5 @@ __pycache__/
 data_pg/
 data_admin/
 data_kafka/
+data_redis/
 # -- End Data Directories -- #

@@ -34,33 +34,15 @@ def read_root(request: fastapi.Request):
 @app.post("/evt")
 def save_event(request: fastapi.Request):
   ts = int(time.time())
-  cur_date = datetime.datetime.fromtimestamp(ts)
   user_id = request.headers.get("user")
   session = request.headers.get("session")
-  
-  ITEM_ID = "00000000-0000-0000-0000-000000000000"
 
   ###### - Not currently used - #######
   event = request.headers.get("event")
   ######-----------------------#######
-  
-  print(    
-    cur_date.date(),
-    cur_date.replace(minute=0, second=0, microsecond=0),
-    ts,
-    user_id,
-    session,
-    event
-  )
 
-  create_fct_metric(
-    app,
-    cur_date.date(),
-    cur_date.replace(minute=0, second=0, microsecond=0),
-    ts,
-    user_id,
-    session,
-    ITEM_ID
-  )
+  log_msg = json.dumps({"type": "evt", "user_id": user_id, "session": session, "ts": ts})
+  app.state.k.produce("logs", log_msg)
+  app.state.k.flush()
 
   return "ok"

@@ -36,6 +36,7 @@ def save_event(request: fastapi.Request):
   ts = int(time.time())
   user_id = request.headers.get("user")
   session = request.headers.get("session")
+  print(request.headers)
 
   ###### - Not currently used - #######
   event = request.headers.get("event")
